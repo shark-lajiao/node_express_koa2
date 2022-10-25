@@ -50,37 +50,43 @@ exports.login = async (req, res) => {
   //登录
   // try {
   /**--------------------------------------------- */
-  console.log(6666);
+  // console.log(6666);
   let resData = {
-    account: req.body.UserNumber,
-    pwd: req.body.UserPassword,
+    account: req.body.username,
+    pwd: req.body.password,
   };
   let sql = "select * from login";
   const resdb = await mysqli(sql, resData.account);
-  console.log(resdb, "数据库查询结果"); //数据库查询结果 ;
+  // console.log(resdb, "数据库查询结果"); //数据库查询结果 ;
   if (resdb === undefined) {
     return res.send({
-      status: 501,
+      code: 501,
       message: "数据库连接错误!",
     });
   }
   let sublog = {
     UserName: "未知",
   };
-  // if (resdb.data.length > 0) {
-  //   sublog.UserName = resdb.data[0].UserName;
-  // }
-  const token = await tokens.setToken(req.body.UserNumber);
-  // console.log('token', req);
-
-  if (token) {
+  if (resdb.data.length > 0) {
+    sublog.UserName = resdb.data[0].UserName;
+  }
+  if (req.body.username === resdb.data[0].user) {
+    const token = await tokens.setToken(sublog.UserName);
     console.log(token);
     return res.send({
-      status: 200,
+      code: 200,
       token,
-      message: "欢迎登录~ ",
+      message: req.body.username,
+    });
+  } else {
+    return res.send({
+      code: 401,
+      message: "用户名或密码错误!",
     });
   }
+
+  // console.log('token', req);
+
   // if (resdb.data.length != 0) {
   //   /**系统日志 */
   //   let sup = { Dept_ID: "" };
@@ -477,24 +483,46 @@ exports.getinitmenu = async (req, res) => {
 };
 //个人信息
 exports.getusermsg = (req, res) => {
-  //个人信息
-  const tokenkey = req.data.UserNumber;
-  let sql = "select * from sys_user where UserNumber=?";
+  const tokenkey = req.body.user;
+  console.log("11111111111111111111111", tokenkey);
+  let sql = "select * from sys_user where user=?";
   let rqdata = [tokenkey];
-  // console.log(rqdata);
+  console.log(rqdata, "rqdata");
   db.query(sql, rqdata, (err, data) => {
     if (err) {
       return res.send({
-        status: 250,
+        code: 250,
         message: err.message,
       });
     }
-    // console.log('tokenkey', level(res).UserGrage);
+    let userdata = {
+      ...data[0],
+      permissions: [
+        {
+          label: "主控台",
+          value: "dashboard_console",
+        },
+        {
+          label: "监控页",
+          value: "dashboard_monitor",
+        },
+        {
+          label: "工作台",
+          value: "dashboard_workplace",
+        },
+        {
+          label: "基础列表",
+          value: "basic_list",
+        },
+        {
+          label: "基础列表删除",
+          value: "basic_list_delete",
+        },
+      ],
+    };
     return res.send({
-      UserNumber: data[0].UserNumber,
-      UserName: data[0].UserName,
-      UserType: data[0].UserType,
-      UserGrade: data[0].UserGrade,
+      code: 200,
+      message: userdata,
     });
   });
 };

@@ -28,21 +28,19 @@ app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));
 app.use(cors()); //配置跨域
 
 app.use(function (req, res, next) {
-  // /v/getlist
-  // /v/getlist2
-  // /login
   //通过ur1获取前端请求的路由
   const {
     url,
     headers: { authorization },
   } = req;
-  // console.log(url, 22222);
+  console.log("接口", url);
+  console.log("token", authorization);
   if (/.*api.*/.test(url)) {
-    console.log(url);
+    // console.log(url);
     //设置不需要验证token的路由
 
     if (url == "/api/login") return next();
-    const token = authorization && authorization.slice(7);
+    const token = authorization;
 
     verToken
       .verToken(token)

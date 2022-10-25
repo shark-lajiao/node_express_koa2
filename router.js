@@ -10,12 +10,13 @@ let express = require("express");
 let router = express.Router();
 let list = require("./API/list");
 let test = require("./API/test");
+let dashboard = require("./API/dashboard");
 const multiparty = require("multiparty");
 router.get("/test", test.test); //测试
-
 router.post("/login", list.login); //登录验证
-router.post("/imgUpload", list.upload.array("img", 1), list.imgUpload); //图片上传
-router.get("/getusermsg", list.getusermsg); //获取用户信息
+// router.post("/imgUpload", list.upload.array("img", 1), list.imgUpload); //图片上传
+router.get("/dashboard", dashboard.data); //仪表盘数据
+router.post("/admin_info", list.getusermsg); //获取用户信息
 router.get("/gethomedata", list.gethomedata); //主页数据统计
 router.get("/getinitmenu", list.getinitmenu); //获取基础菜单信息
 router.get("/initnotice", list.initnotice); //获取通知列表
