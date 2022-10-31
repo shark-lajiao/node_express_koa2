@@ -10,6 +10,7 @@ let express = require("express");
 let router = express.Router();
 let list = require("./API/list");
 let test = require("./API/test");
+let tabel = require("./API/tabel");
 let dashboard = require("./API/dashboard");
 const multiparty = require("multiparty");
 router.get("/test", test.test); //测试
@@ -17,18 +18,19 @@ router.post("/login", list.login); //登录验证
 // router.post("/imgUpload", list.upload.array("img", 1), list.imgUpload); //图片上传
 router.get("/dashboard", dashboard.data); //仪表盘数据
 router.post("/admin_info", list.getusermsg); //获取用户信息
-router.get("/gethomedata", list.gethomedata); //主页数据统计
-router.get("/getinitmenu", list.getinitmenu); //获取基础菜单信息
-router.get("/initnotice", list.initnotice); //获取通知列表
+router.get("/table/list", tabel.usertabel); //获取用户表
 
-let sysadmin = require("./API/sysadmin");
-router.post("/menu_xzxg", sysadmin.menu_xzxg); //新增、修改、页面菜单信息
-router.post("/user_xzxg", sysadmin.user_xzxg); //新增、修改、用户信息
-router.post("/postexcelsub", sysadmin.postexcelsub); //excel表提交
-router.get("/sys_select", sysadmin.sys_select); //系统查询，用户，字典信息
+// router.get("/gethomedata", list.gethomedata); //主页数据统计
+// router.get("/getinitmenu", list.getinitmenu); //获取基础菜单信息
+// router.get("/initnotice", list.initnotice); //获取通知列表
+// let sysadmin = require("./API/sysadmin");
+// router.post("/menu_xzxg", sysadmin.menu_xzxg); //新增、修改、页面菜单信息
+// router.post("/user_xzxg", sysadmin.user_xzxg); //新增、修改、用户信息
+// router.post("/postexcelsub", sysadmin.postexcelsub); //excel表提交
+// router.get("/sys_select", sysadmin.sys_select); //系统查询，用户，字典信息
 
-router.get("/menu_del", sysadmin.menu_del); //删除菜单
-router.get("/notice_select", sysadmin.notice_select); //查看各种通知
+// router.get("/menu_del", sysadmin.menu_del); //删除菜单
+// router.get("/notice_select", sysadmin.notice_select); //查看各种通知
 
 //上传个人头像图片
 router.post("/upload/headImage", function (req, res, next) {
