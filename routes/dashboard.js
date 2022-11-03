@@ -1,5 +1,6 @@
-const { db, mysqli } = require("../db/index");
 const { Random } = require("mockjs");
+const router = require("koa-router")();
+router.prefix("/api");
 const consoleInfo = {
   //访问量
   visits: {
@@ -29,6 +30,10 @@ const consoleInfo = {
     amount: Random.float(99999, 999999, 2, 2),
   },
 };
-exports.data = async (req, res) => {
-  res.send(consoleInfo);
-};
+router.get("/dashboard", async (ctx, next) => {
+  ctx.response.body = {
+    code: "200",
+    data: consoleInfo,
+  };
+});
+module.exports = router;

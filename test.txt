@@ -1,0 +1,11 @@
+cpu i5 12400f (1279)
+主板 华硕b660m (1029)
+显卡 RX5600 （600）
+散热 大水牛寒战240 （169）
+电源 鑫谷金牌750w (439)
+运存 威刚 游戏威龙Z1 (338)
+硬盘 金士顿1t (449)
+机箱 爱国者 m2 (199)
+风扇 爱国者八度空间 (119)
+
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjY3NDU5NDkzLCJleHAiOjE2Njc0NzM4OTN9.txpt1m4NlY_oaePsv749Kd7NLrwut4qfY2m3Dp1RacY"

@@ -1,14 +1,4 @@
-/*
- * @Author: Undecimber 2059085250@qq.com
- * @Date: 2022-08-01 09:24:02
- * @LastEditors: Undecimber 2059085250@qq.com
- * @LastEditTime: 2022-09-30 17:01:24
- * @FilePath: \server\util\token.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 const mysql = require("mysql");
-const { resolve } = require("path");
-const request1 = require("request");
 const sqldata = {
   sql_1: {
     host: "localhost", //数据库IP地址
@@ -45,59 +35,8 @@ const mysqli = function (sql, params) {
     console.log("promiseerror：", err);
   });
 };
-
-// const cnwh = function (data1, data2) {
-//   return new Promise((resolve, reject) => {
-//     let url =
-//       "http://hy.imes.zte.com.cn/zte-mes-manufactureshare-basicsettingsys/BMC/bsBarcodeInfo";
-//     let resData = {
-//       page: "1",
-//       rows: "10000",
-//       itemCode: data1,
-//       lineCode: data2,
-//       order: "desc",
-//       sort: "lastUpdatedDate",
-//     };
-//     request1(
-//       {
-//         url: url,
-//         method: "GET",
-//         timeout: 3000000,
-//         json: true,
-//         headers: {
-//           "content-type": "application/json",
-//           // "content-type": "text/json",
-//           "X-Emp-No": 10313234,
-//           "X-Factory-Id": 55,
-//         },
-//         qs: resData,
-//       },
-//       function (error, response, bodys) {
-//         if (error) {
-//           // console.log(123);
-//           reject({
-//             status: 501,
-//             message: "产能接口错误~",
-//             data: error,
-//           });
-//         } else {
-//           // console.log(data1, "-" + data2, 456, bodys.bo);
-//           resolve({
-//             status: 200,
-//             message: "产能维护~",
-//             data: bodys.bo,
-//           });
-//         }
-//       }
-//     );
-//   }).catch((err) => {
-//     console.log("promiseerror2：", err);
-//   });
-// };
-
 module.exports = {
   db,
   sqldata,
   mysqli,
-  // cnwh,
 };
