@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80031 (8.0.31-0ubuntu0.20.04.1)
+ Source Server Version : 80031 (8.0.31-0ubuntu0.22.04.1)
  Source Host           : localhost:3306
  Source Schema         : admin
 
  Target Server Type    : MySQL
- Target Server Version : 80031 (8.0.31-0ubuntu0.20.04.1)
+ Target Server Version : 80031 (8.0.31-0ubuntu0.22.04.1)
  File Encoding         : 65001
 
- Date: 31/10/2022 17:34:21
+ Date: 04/11/2022 15:11:39
 */
 
 SET NAMES utf8mb4;
@@ -27,6 +27,7 @@ CREATE TABLE `adminInfo` (
   `realName` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `desc` varchar(255) DEFAULT NULL,
+  `permissions` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
@@ -37,10 +38,10 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user` varchar(255) NOT NULL COMMENT '账户',
-  `passwrold` varchar(255) NOT NULL COMMENT '密码',
+  `passwrod` varchar(255) CHARACTER SET utf32 COLLATE utf32_general_ci NOT NULL COMMENT '密码',
   `jurisdiction` int NOT NULL DEFAULT '0' COMMENT '权限',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Table structure for sys_user
